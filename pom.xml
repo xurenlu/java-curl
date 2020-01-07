@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <distributionManagement>
+    <repository>
+      <id>rdc-releases</id>
+      <url>https://repo.rdc.aliyun.com/repository/20109-release-v48J68/</url>
+    </repository>
+    <snapshotRepository>
+      <id>rdc-snapshots</id>
+      <url>https://repo.rdc.aliyun.com/repository/20109-snapshot-TztazJ/</url>
+    </snapshotRepository>
+  </distributionManagement>
 
-  <groupId>com.github.rockswang</groupId>
+
+  <groupId>de.shifen.common</groupId>
   <artifactId>java-curl</artifactId>
-  <version>${release-version}</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
-  </parent>
+
 
   <name>java-curl</name>
   <description>Ultra-lightweight CURL implementation in pure java 1.6</description>
-  <url>https://github.com/rockswang/java-curl</url>
+  <url>https://github.com/xurenlu/java-curl</url>
 
   <properties>
     <!--<maven.javadoc.failOnError>false</maven.javadoc.failOnError>-->
@@ -119,7 +125,7 @@
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <manifestEntries>
-                    <Main-Class>com.roxstudio.utils.CUrl</Main-Class>
+                    <Main-Class>de.shifen.common.curl.CUrl</Main-Class>
                   </manifestEntries>
                 </transformer>
               </transformers>
@@ -129,42 +135,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo,manual</distribution>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <name>Rocks Wang</name>
-      <email>rockswang@foxmail.com</email>
-      <organization>roxstudio</organization>
-      <url>https://github.com/rockswang</url>
-    </developer>
-  </developers>
-
-  <scm>
-    <connection>scm:git:https://github.com/rockswang/java-curl.git</connection>
-    <developerConnection>scm:git:https://github.com/rockswang/java-curl.git</developerConnection>
-    <url>https://github.com/rockswang/java-curl</url>
-    <tag>${release-version}</tag>
-  </scm>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <name>OSS Snapshots Repository</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <name>OSS Staging Repository</name>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
 
 </project>

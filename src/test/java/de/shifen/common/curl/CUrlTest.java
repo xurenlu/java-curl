@@ -1,4 +1,4 @@
-package com.roxstudio.utils;
+package de.shifen.common.curl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
@@ -54,7 +54,7 @@ public class CUrlTest {
     @Test
     public void insecureHttpsViaFiddler() {
         CUrl curl = curl("https://httpbin.org/get")
-                .proxy("127.0.0.1", 8888) // Use Fiddler to capture & parse HTTPS traffic
+                .proxy("127.0.0.1", 1087) // Use Fiddler to capture & parse HTTPS traffic
                 .insecure();  // Ignore certificate check since it's issued by Fiddler
         curl.exec();
         assertEquals(200, curl.getHttpCode());
@@ -66,7 +66,8 @@ public class CUrlTest {
                 .data("hello=world&foo=bar")
                 .data("foo=overwrite");
         curl.exec();
-        assertEquals(200, curl.getHttpCode());
+        int httpCode = curl.getHttpCode();
+        assertEquals(200, httpCode);
     }
 
     @Test
@@ -84,7 +85,7 @@ public class CUrlTest {
     @Test
     public void httpBasicAuth() {
         CUrl curl = curl("http://httpbin.org/basic-auth/abc/aaa")
-                .proxy("127.0.0.1", 8888)
+                .proxy("127.0.0.1", 1087)
                 .opt("-u", "abc:aaa");
         curl.exec();
         assertEquals(200, curl.getHttpCode());
@@ -169,7 +170,7 @@ public class CUrlTest {
     public void selfSignedCertificate() {
         CUrl curl = new CUrl("https://www.baidu.com/")
                 .cert(new CUrl.FileIO("D:/tmp/test_jks.jks"), "123456")
-                .proxy("127.0.0.1", 8888);
+                .proxy("127.0.0.1", 1087);
         System.out.println(curl.exec(CUrl.UTF8, null));
     }
 
@@ -178,7 +179,7 @@ public class CUrlTest {
     private CUrl curl(String url) {
         CUrl curl = new CUrl(url);
         if (ENABLE_FIDDLER_FOR_ALL_TEST) {
-            curl.proxy("127.0.0.1", 8888).insecure();
+            curl.proxy("127.0.0.1", 1087).insecure();
         }
         return curl;
     }
